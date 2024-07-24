@@ -48,7 +48,7 @@ const Cart = () => {
             <div className="px-4">
                 <div className="container">
                     <div className="row">
-                        <NavLink to='/checkout' className='btn btn-outline-primary mb-3 w-25 mx-auto'>Proceed To Checkout</NavLink>
+                        <NavLink to='/checkout' className='btn btn-outline-primary mb-3 w-md-25 mx-auto'>Proceed To Checkout</NavLink>
                     </div>
                 </div>
             </div>
