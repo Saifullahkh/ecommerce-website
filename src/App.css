@@ -1,38 +1,221 @@
-.App {
-  text-align: center;
+/* Typography & layout improvements for header */
+
+.navbar {
+  font-family: 'Poppins', sans-serif !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar-brand {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+  color: #667eea !important;
+  letter-spacing: 1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.navbar-brand i {
+  font-size: 1.4rem;
+  margin-right: 8px;
+}
+
+.nav-link {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  color: #333 !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #667eea !important;
+}
+
+.text-dark.fs-4 {
+  color: #333 !important;
+  transition: color 0.3s ease;
+}
+
+.text-dark.fs-4:hover {
+  color: #667eea !important;
+}
+.fs-4{
+  font-family: 'Poppins', sans-serif !important;
+}
+
+
+/* Home section */
+.hero-section {
+  height: 80vh;
+  background-image: url('https://media.istockphoto.com/id/1219954010/photo/casual-men-clothes-in-apparel-store.jpg?s=612x612&w=0&k=20&c=g4NYxJHSDEwR-qk4Wn9o4h1UFi6DR8ziTRKmX7sucNU=') !important; /* you can change image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* overlay */
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Product section */
+.product-card {
+  border: none;
+  border-radius: 12px;
+  
+}
+
+.product-card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+ 
+}
+
+.product-image {
+  height: 220px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.product-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0;
+  margin-right: 0.5rem;
+}
+
+.detail-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.detail-button:hover {
+  color: #fff;
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+.bg-primary-gradient {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
   }
+
+/* In your CSS file */
+.cart-badge {
+  font-size: 0.6rem;
+  padding: 0.2em 0.4em;
+  top: -5px;
+  right: -5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* ProductCategory */
+.custom-category-tabs {
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.custom-category-tabs li {
+  margin: 0;
+}
+
+.category-tab {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.category-tab:hover {
+  background-color: #e9ecef;
+  border-color: #ccc;
+}
+
+.category-tab.active {
+  background-color: #667eea !important;
+  border-color: #667eea;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* For a more modern look with subtle shadows */
+.category-tab {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.category-tab.active {
+  box-shadow: 0 2px 8px rgba(0,123,255,0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .custom-category-tabs {
+    gap: 0.5rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .category-tab {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
   }
+}
+
+/* Subscribe section */
+.subscribe{
+  background: url('https://media.istockphoto.com/id/1222457390/photo/small-business-owener-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=hs9z-Z-KfigNcuhQmstnEdZFf33WXR2k-gyrdPwpMQo=') center center no-repeat; 
+  background-size: cover;
+}
+
+.btn1{
+  background:  #667eea !important;
+  color: #ffff;
+}
+
+.btn1:hover{
+   background:  #0e52b9bd !important;
+   color: #ffff;
+}
+
+.btn-outline{
+  border: 1px solid #667eea !important;
+}
+
+.btn-outline:hover {
+  background:  #667eea !important;
+  color: #ffff;
+}
+
+.text-primary{
+  color: #667eea !important;
 }
