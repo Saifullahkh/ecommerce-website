@@ -1,32 +1,70 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const CheckoutPage = () => {
   const { cartItems, cartTotal, clearCart } = useCart();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    city: '',
-    zipCode: '',
-    paymentMethod: 'credit-card'
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    paymentMethod: "credit-card",
   });
 
+  const [loading, setLoading] = useState(false);
+
+  // input change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  // submit handler
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Process payment and submit order here
-    alert('Order submitted:', { ...formData, items: cartItems, total: cartTotal });
-    clearCart();
-    // Redirect to confirmation page
+    setLoading(true);
+
+    const orderData = {
+      ...formData,
+      items: cartItems,
+      total: cartTotal,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycby_XvjXERowZTf-GA52egmGh56-Wl7GPXGPj_H2mOpYjFqJfeXoSfYCLOLUDJXeygl8WA/exec", // <-- replace with actual deployed web app URL
+        {
+          method: "POST",
+          body: JSON.stringify(orderData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const result = await response.json();
+      if (result.result === "success") {
+        alert("✅ Order submitted successfully!");
+        clearCart();
+        navigate("/order-confirmation");
+      } else {
+        alert("❌ Something went wrong while saving order!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("❌ Error submitting order. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // agar cart empty hai
   if (cartItems.length === 0) {
     return (
       <div className="container py-5 text-center">
@@ -41,6 +79,7 @@ const CheckoutPage = () => {
   return (
     <div className="container py-5">
       <div className="row">
+        {/* Form Section */}
         <div className="col-md-8">
           <div className="card mb-4">
             <div className="card-body">
@@ -48,7 +87,9 @@ const CheckoutPage = () => {
               <form onSubmit={handleSubmit}>
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label htmlFor="firstName" className="form-label">First Name</label>
+                    <label htmlFor="firstName" className="form-label">
+                      First Name
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -60,7 +101,9 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label htmlFor="lastName" className="form-label">Last Name</label>
+                    <label htmlFor="lastName" className="form-label">
+                      Last Name
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -72,7 +115,9 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-12">
-                    <label htmlFor="email" className="form-label">Email</label>
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
                     <input
                       type="email"
                       className="form-control"
@@ -84,7 +129,9 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-12">
-                    <label htmlFor="address" className="form-label">Address</label>
+                    <label htmlFor="address" className="form-label">
+                      Address
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -96,7 +143,9 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label htmlFor="city" className="form-label">City</label>
+                    <label htmlFor="city" className="form-label">
+                      City
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -108,7 +157,9 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label htmlFor="zipCode" className="form-label">ZIP Code</label>
+                    <label htmlFor="zipCode" className="form-label">
+                      ZIP Code
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -121,67 +172,52 @@ const CheckoutPage = () => {
                   </div>
                 </div>
 
+                {/* Payment Method */}
                 <h2 className="mt-5 mb-4">Payment Method</h2>
-                <div className="form-check mb-3">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="paymentMethod"
-                    id="credit-card"
-                    value="credit-card"
-                    checked={formData.paymentMethod === 'credit-card'}
-                    onChange={handleChange}
-                  />
-                  <label className="form-check-label" htmlFor="credit-card">
-                    Credit Card
-                  </label>
-                </div>
-                <div className="form-check mb-3">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="paymentMethod"
-                    id="paypal"
-                    value="paypal"
-                    checked={formData.paymentMethod === 'paypal'}
-                    onChange={handleChange}
-                  />
-                  <label className="form-check-label" htmlFor="paypal">
-                    PayPal
-                  </label>
-                </div>
-                <div className="form-check mb-3">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="paymentMethod"
-                    id="cash-on-delivery"
-                    value="cash-on-delivery"
-                    checked={formData.paymentMethod === 'cash-on-delivery'}
-                    onChange={handleChange}
-                  />
-                  <label className="form-check-label" htmlFor="cash-on-delivery">
-                    Cash on Delivery
-                  </label>
-                </div>
+                {["credit-card", "paypal", "cash-on-delivery"].map((method) => (
+                  <div className="form-check mb-3" key={method}>
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="paymentMethod"
+                      id={method}
+                      value={method}
+                      checked={formData.paymentMethod === method}
+                      onChange={handleChange}
+                    />
+                    <label className="form-check-label" htmlFor={method}>
+                      {method.replace("-", " ").toUpperCase()}
+                    </label>
+                  </div>
+                ))}
 
-                <button type="submit" className="btn btn1 w-100 mt-4 py-3">
-                  Place Order
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100 mt-4 py-3"
+                  disabled={loading}
+                >
+                  {loading ? "Placing Order..." : "Place Order"}
                 </button>
               </form>
             </div>
           </div>
         </div>
 
+        {/* Order Summary */}
         <div className="col-md-4">
           <div className="card">
             <div className="card-body">
               <h2 className="mb-4">Order Summary</h2>
-              {cartItems.map(item => (
-                <div key={item.id} className="d-flex justify-content-between mb-2">
+              {cartItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="d-flex justify-content-between mb-2"
+                >
                   <div>
                     <span>{item.title}</span>
-                    <span className="text-muted d-block">Qty: {item.quantity}</span>
+                    <span className="text-muted d-block">
+                      Qty: {item.quantity}
+                    </span>
                   </div>
                   <div>${(item.price * item.quantity).toFixed(2)}</div>
                 </div>

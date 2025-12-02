@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { CiShoppingCart } from "react-icons/ci";
 import '../App.css';
@@ -8,6 +8,13 @@ import logo from '../assets/logo3.png'
 
 
 function Header() {
+   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   const { 
   cartItems, 
   cartCount, 
@@ -56,9 +63,40 @@ function Header() {
 
           {/* Right: Icons */}
           <div className="d-flex align-items-center gap-3  justify-content-md-center ">
-            <Link to="/profile" className="text-dark fs-4 fw-bold">
-              <IoPersonCircleSharp />
-            </Link>
+            <div className="dropdown">
+      <button
+        className="btn border-0 bg-transparent dropdown-toggle"
+        type="button"
+        onClick={() => setOpen(!open)}
+      >
+        <IoPersonCircleSharp className="fs-2 text-dark" />
+      </button>
+      <ul className={`dropdown-menu dropdown-menu-end ${open ? "show" : ""}`}>
+        <li>
+          <Link className="dropdown-item" to="/profile">
+            Profile
+          </Link>
+        </li>
+        <li>
+          <Link className="dropdown-item" to="/settings">
+            Settings
+          </Link>
+        </li>
+        <li>
+          <Link className="dropdown-item" to="/privacy">
+            Privacy
+          </Link>
+        </li>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+        <li>
+          <button className="dropdown-item text-danger" onClick={handleLogout}>
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
             <Link to="/cart" className="text-dark fs-4 fw-bold position-relative">
               <CiShoppingCart />
               {cartCount > 0 && (
