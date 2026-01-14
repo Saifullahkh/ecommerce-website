@@ -236,7 +236,7 @@ const LoginPage = () => {
               )}
             </div>
 
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label className="form-label fw-semibold">Role</label>
               <select
                 name="role"
@@ -248,7 +248,7 @@ const LoginPage = () => {
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="mb-3 form-check">
               <input
