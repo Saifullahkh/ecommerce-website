@@ -79,7 +79,7 @@ const Contact = () => {
                     </div>
                 </div>
 
-                <div className="d-flex">
+                {/* <div className="d-flex">
                     <div className="bg-primary bg-opacity-10 text-primary rounded-circle p-3 d-flex align-items-center justify-content-center me-4" style={{ width: '50px', height: '50px' }}>
                         <FaClock className="fs-5" />
                     </div>
@@ -88,7 +88,7 @@ const Contact = () => {
                         <p className="text-muted mb-0">Monday - Friday: 9:00 AM - 6:00 PM</p>
                         <p className="text-muted mb-0">Saturday - Sunday: Closed</p>
                     </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
