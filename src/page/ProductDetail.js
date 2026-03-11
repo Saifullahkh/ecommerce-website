@@ -48,8 +48,7 @@ const ProductDetail = () => {
   // Sample images array - replace with your actual product images if available
   const productImages = [
     product.image,
-    'https://via.placeholder.com/500x500?text=Product+Image+2',
-    'https://via.placeholder.com/500x500?text=Product+Image+3'
+   
   ];
 
   return (
