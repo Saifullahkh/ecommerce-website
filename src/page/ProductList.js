@@ -2,9 +2,12 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts } from '../services/productApi';
 import ProductCard from '../component/ProductCard';
+import { motion } from 'framer-motion'
+import { FiFilter, FiSearch, FiAlertCircle } from "react-icons/fi";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     getAllProducts()
@@ -12,25 +15,36 @@ const ProductList = () => {
       .catch(err => console.error(err));
   }, []);
 
+  
+
   return (
     <>
-        <div className="bg-light py-5" >
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col">
-                <div className="text-center py-5">
-                  <h1 className="fw-bold text-dark mb-2 display-4" style={{ letterSpacing: '-0.5px' }}>
-                     All Products
-                  </h1>
-                  <p className="text-muted mx-auto mb-0 fs-5" style={{ maxWidth: '600px' }}>
-                    Discover our <span className="text-primary fw-medium">premium collection</span> of 
-                    carefully curated products designed to elevate your experience
-                  </p>
-                </div>
+           {/* 1. Header Section */}
+      <section className="py-5 border-bottom" style={{ backgroundColor: '#f1f2d9' }}>
+        <div className="container py-5">
+          <div className="row align-items-center">
+            <div className="col-lg-6 offset-lg-3 text-center">
+              <motion.h1 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="display-3 fw-bold mb-3"
+              >
+                Our Collection
+              </motion.h1>
+              <div className="search-bar-container position-relative">
+                <FiSearch className="position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" />
+                <input 
+                  type="text" 
+                  className="form-control form-control-lg ps-5 rounded-pill shadow-sm border-0" 
+                  placeholder="Search your favorite items..."
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
             </div>
           </div>
         </div>
+      </section>
+      
 
 
         <div className='container py-5'>

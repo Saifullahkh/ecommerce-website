@@ -3,12 +3,13 @@ import '../App.css'; // Import the CSS file
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="col-md-4 mb-4">
+    <div className="col-12 col-sm-6 col-lg-4 mb-4">
       <div className="card h-100 overflow-hidden shadow-sm product-card">
         <img
           src={product.image}
           className="card-img-top product-image"
           alt={product.title}
+          loading='lazy'
         />
         
         <div className="card-body d-flex flex-column">

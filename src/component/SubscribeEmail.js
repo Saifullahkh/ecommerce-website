@@ -10,7 +10,7 @@ function SubscribeEmail() {
 
   return (
    <div className='subscribe'>
-        <div className="container py-4">
+        <div className="container ">
             <div className="row justify-content-center">
                 <div className="col-lg-8 col-md-10 ">
                     <div className="card border-0 p-4 p-md-5 bg-transparent text-white">
