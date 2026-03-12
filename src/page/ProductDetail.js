@@ -12,7 +12,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity] = useState(1);
   const { addToCart } = useContext(CartContext);
   const [activeTab, setActiveTab] = useState('details');
 
