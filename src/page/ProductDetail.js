@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { getProductById } from '../services/productApi';
 import { CartContext } from '../context/CartContext';
-import { FaStar, FaRegStar, FaShoppingCart, FaHeart, FaShare } from 'react-icons/fa';
+import { FaStar, FaRegStar, FaShoppingCart, } from 'react-icons/fa';
 
 
 const ProductDetail = () => {
@@ -112,7 +112,7 @@ const ProductDetail = () => {
 
                   <p className="text-muted mb-4">{product.description}</p>
 
-                  <div className="d-flex gap-3 mb-4">
+                  <div className="d-flex gap-3 mb-4 align-items-center">
                     <button 
                       className="btn btn1 flex-grow-1 py-2 fw-bold"
                       onClick={handleAddToCart}

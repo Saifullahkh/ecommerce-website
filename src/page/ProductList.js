@@ -3,11 +3,10 @@ import { useEffect, useState } from 'react';
 import { getAllProducts } from '../services/productApi';
 import ProductCard from '../component/ProductCard';
 import { motion } from 'framer-motion'
-import { FiFilter, FiSearch, FiAlertCircle } from "react-icons/fi";
+import { FiSearch} from "react-icons/fi";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     getAllProducts()
@@ -37,7 +36,7 @@ const ProductList = () => {
                   type="text" 
                   className="form-control form-control-lg ps-5 rounded-pill shadow-sm border-0" 
                   placeholder="Search your favorite items..."
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  
                 />
               </div>
             </div>
