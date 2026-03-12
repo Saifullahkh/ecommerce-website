@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="row">
           {/* Column 1: About */}
           <div className="col-md-4 mb-4">
-             <img src={logo} height='60px' className='mb-3'/>
+             <img src={logo} height='60px' className='mb-3' alt='footer img'/>
             <p className="">
               Quality products, great prices. Shop your favorite categories anytime, anywhere.
             </p>

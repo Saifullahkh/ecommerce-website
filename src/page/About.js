@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBolt, FaShieldAlt, FaBullseye, FaEye, FaHeart, FaArrowRight, FaShoppingCart, FaEnvelope } from 'react-icons/fa';
+import { FaBolt, FaShieldAlt, FaBullseye, FaEye, FaHeart } from 'react-icons/fa';
 import { GiCommercialAirplane } from 'react-icons/gi';
 import { BsGraphUp } from 'react-icons/bs';
 import { RiSecurePaymentLine } from 'react-icons/ri';

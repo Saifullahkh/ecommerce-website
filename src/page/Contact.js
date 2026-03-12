@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaPaperPlane, FaClock } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaPaperPlane } from "react-icons/fa";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import emailjs from 'emailjs-com';
@@ -143,6 +143,7 @@ const Contact = () => {
       <div className="container-fluid px-0 pt-5">
         <div className="ratio ratio-21x9 grayscale-filter">
           <iframe 
+            title="Location Map - Satellite Town, Rawalpindi"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13289.04940562548!2d73.0645!3d33.6401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df94916a9a7a13%3A0xc3f7a7f4575f0a8c!2sSatellite%20Town%2C%20Rawalpindi!5e0!3m2!1sen!2spk!4v1700000000000" 
             allowFullScreen="" loading="lazy">
           </iframe>
