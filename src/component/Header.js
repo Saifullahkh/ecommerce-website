@@ -24,7 +24,21 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleMobileMenuClose = () => {
+    const navbarContent = document.getElementById('navbarContent');
+    if (navbarContent && navbarContent.classList.contains('show')) {
+      const toggler = document.querySelector('.navbar-toggler');
+      // Only click the toggler if it's visible (i.e., we're actually in mobile view)
+      if (toggler && window.getComputedStyle(toggler).display !== 'none') {
+        toggler.click();
+      }
+    }
+    // Also close the profile dropdown just in case
+    setIsDropdownOpen(false);
+  };
+
   const handleLogout = () => {
+    handleMobileMenuClose();
     // Add your logout logic here
     console.log("Logged out");
     navigate('/login');
@@ -33,14 +47,14 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-md py-2 sticky-top shadow-sm" style={{ backgroundColor: '#f1f2d9', minHeight: '80px' }}>
       <div className="container">
-        
+
         {/* Brand/Logo with Hover Effect */}
-        <Link className="navbar-brand" to="/">
-          <motion.img 
+        <Link className="navbar-brand" to="/" onClick={handleMobileMenuClose}>
+          <motion.img
             whileHover={{ scale: 1.05 }}
-            src={logo} 
-            height='50px' 
-            alt="logo" 
+            src={logo}
+            height='50px'
+            alt="logo"
           />
         </Link>
 
@@ -59,9 +73,10 @@ function Header() {
           <ul className="navbar-nav mx-auto gap-lg-4">
             {['Home', 'Products', 'About', 'Contact'].map((item) => (
               <li className="nav-item" key={item}>
-                <NavLink 
+                <NavLink
                   className={({ isActive }) => `nav-link fw-semibold ${isActive ? 'text-primary' : 'text-dark'}`}
                   to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                  onClick={handleMobileMenuClose}
                 >
                   {item}
                 </NavLink>
@@ -71,13 +86,13 @@ function Header() {
 
           {/* Right Side: Actions */}
           <div className="d-flex align-items-center gap-4">
-            
+
             {/* Cart Icon with Animated Badge */}
-            <Link to="/cart" className="text-dark fs-3 position-relative d-flex align-items-center">
+            <Link to="/cart" className="text-dark fs-3 position-relative d-flex align-items-center" onClick={handleMobileMenuClose}>
               <CiShoppingCart />
               <AnimatePresence>
                 {cartCount > 0 && (
-                  <motion.span 
+                  <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
@@ -101,15 +116,15 @@ function Header() {
 
               <AnimatePresence>
                 {isDropdownOpen && (
-                  <motion.ul 
+                  <motion.ul
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     className="dropdown-menu dropdown-menu-end show shadow border-0 mt-2"
                     style={{ borderRadius: '12px', overflow: 'hidden' }}
                   >
-                    <li><Link className="dropdown-item py-2" to="/profile"><IoPersonCircleSharp className="me-2"/> Profile</Link></li>
-                    <li><Link className="dropdown-item py-2" to="/settings"><IoSettingsOutline className="me-2"/> Settings</Link></li>
+                    <li><Link className="dropdown-item py-2" to="/profile" onClick={handleMobileMenuClose}><IoPersonCircleSharp className="me-2" /> Profile</Link></li>
+                    <li><Link className="dropdown-item py-2" to="/settings" onClick={handleMobileMenuClose}><IoSettingsOutline className="me-2" /> Settings</Link></li>
                     <li><hr className="dropdown-divider" /></li>
                     <li>
                       <button className="dropdown-item text-danger py-2" onClick={handleLogout}>
